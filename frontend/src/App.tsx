@@ -13,6 +13,8 @@ import MyLearningPage from "@/pages/MyLearningPage";
 import CoursePlayerPage from "@/pages/CoursePlayerPage";
 import AddContentPage from "@/pages/AddContentPage";
 import CreatorDashboardPage from "@/pages/CreatorDashboardPage";
+import SignupPage from "@/pages/SignupPage";
+
 
 
 
@@ -26,6 +28,8 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+
 
         {/* Protected Routes */}
         <Route

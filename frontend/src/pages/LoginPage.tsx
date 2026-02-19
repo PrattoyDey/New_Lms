@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "@/services/authService";
 import { Button } from "@/components/ui/button";
 
@@ -60,6 +60,18 @@ function LoginPage() {
           >
             Login
           </Button>
+          <div className="text-center mt-4 text-sm">
+            <span className="text-muted-foreground">
+              New user?
+            </span>{" "}
+            <Link
+              to="/signup"
+              className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
+            >
+              Sign up here
+            </Link>
+          </div>
+
         </div>
       </div>
     </div>
