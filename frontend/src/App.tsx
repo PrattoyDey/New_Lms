@@ -11,9 +11,9 @@ import ProtectedRoute from "@/routes/ProtectedRoute";
 import Navbar from "@/components/Navbar";
 import MyLearningPage from "@/pages/MyLearningPage";
 import CoursePlayerPage from "@/pages/CoursePlayerPage";
-import AddContentPage from "@/pages/AddContentPage";
 import CreatorDashboardPage from "@/pages/CreatorDashboardPage";
 import SignupPage from "@/pages/SignupPage";
+import ManageCoursePage from "./pages/ManageCoursePage";
 
 
 
@@ -75,14 +75,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/add-content"
-          element={
-            <ProtectedRoute requiredPermission="can_update_course">
-              <AddContentPage />
-            </ProtectedRoute>
-          }
-        />
+        
         <Route
           path="/creator-dashboard"
           element={
@@ -91,10 +84,12 @@ function App() {
             </ProtectedRoute>
           }
         />
-
-
-
-
+        <Route path="/manage-course/:id" element={
+          <ProtectedRoute requiredPermission="can_update_course">
+            <ManageCoursePage />
+          </ProtectedRoute>
+          } 
+        />
 
         <Route path="*" element={<Navigate to="/" replace />} />
 

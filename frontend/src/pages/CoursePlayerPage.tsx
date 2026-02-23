@@ -30,18 +30,20 @@ function CoursePlayerPage() {
   }, [id]);
 
   const fetchStructure = async () => {
-    try {
-      const data = await getCourseStructure(courseId);
-      setSections(data);
+  try {
+    const data = await getCourseStructure(courseId);
+    console.log("STRUCTURE DATA:", data); // 👈 ADD THIS
 
-      if (data.length > 0 && data[0].lessons.length > 0) {
-        setSelectedLesson(data[0].lessons[0]);
-        setExpandedSections([data[0].id]);
-      }
-    } catch {
-      alert("Failed to load course structure");
+    setSections(data);
+
+    if (data.length > 0 && data[0].lessons.length > 0) {
+      setSelectedLesson(data[0].lessons[0]);
     }
-  };
+  } catch {
+    alert("Failed to load course structure");
+  }
+};
+
 
   const toggleSection = (sectionId: number) => {
     if (expandedSections.includes(sectionId)) {

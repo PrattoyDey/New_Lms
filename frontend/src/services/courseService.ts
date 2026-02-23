@@ -1,11 +1,15 @@
 import api from "./api";
 
+/* ================= TYPES ================= */
+
 export interface Course {
   id: number;
   title: string;
   description: string;
   creator_email: string;
 }
+
+/* ================= COURSES ================= */
 
 export const getCourses = async (): Promise<Course[]> => {
   const response = await api.get<Course[]>("/courses/");
@@ -31,22 +35,39 @@ export const getMyLearning = async () => {
   return response.data;
 };
 
-export const getCourseContents = async (courseId: number) => {
-  const response = await api.get(`/courses/${courseId}/contents/`);
-  return response.data;
-};
-
-export const addCourseContent = async (data: any) => {
-  const response = await api.post("/courses/add-content/", data);
-  return response.data;
-};
-
 export const getMyCourses = async () => {
   const response = await api.get("/courses/my-courses/");
   return response.data;
 };
 
+/* ================= STRUCTURE ================= */
+
 export const getCourseStructure = async (courseId: number) => {
   const response = await api.get(`/courses/${courseId}/structure/`);
+  return response.data;
+};
+
+/* ================= SECTIONS ================= */
+
+export const createSection = async (data: {
+  course: number;
+  title: string;
+  order: number;
+}) => {
+  const response = await api.post("/courses/add-section/", data);
+  return response.data;
+};
+
+/* ================= LESSONS ================= */
+
+export const addLesson = async (data: {
+  course: number;
+  section: number;
+  title: string;
+  content?: string;
+  video_url?: string;
+  order: number;
+}) => {
+  const response = await api.post("/courses/add-lesson/", data);
   return response.data;
 };

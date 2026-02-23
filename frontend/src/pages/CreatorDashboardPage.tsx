@@ -20,7 +20,7 @@ function CreatorDashboardPage() {
     try {
       const data = await getMyCourses();
       setCourses(data);
-    } catch (error) {
+    } catch {
       console.error("Failed to load courses");
     }
   };
@@ -51,11 +51,11 @@ function CreatorDashboardPage() {
               <div className="flex gap-3">
                 <button
                   onClick={() =>
-                    navigate(`/add-content?courseId=${course.id}`)
+                    navigate(`/manage-course/${course.id}`)
                   }
                   className="bg-blue-600 text-white px-4 py-2 rounded"
                 >
-                  Add Content
+                  Manage
                 </button>
 
                 <button

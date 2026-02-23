@@ -38,10 +38,7 @@ function Navbar() {
             <Link to="/create-course">Create Course</Link>
           )}
 
-          {authorization.isAuthorized("can_update_course") && (
-            <Link to="/add-content">Add Content</Link>
-          )}
-
+          
           {authorization.isAuthorized("can_create_course") && (
             <Link to="/creator-dashboard">Creator Dashboard</Link>
           )}

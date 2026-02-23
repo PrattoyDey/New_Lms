@@ -1,22 +1,16 @@
 from rest_framework import serializers
-from .models import Course, CourseContent, Enrollment
-from .models import Section
+from .models import Course, Section, Lesson, Enrollment
 
 
-
-class CourseContentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CourseContent
-        fields = ["id",
-            "course",
-            "title",
-            "content",
-            "video_url"]
-
+# -------------------------
+# Course
+# -------------------------
 
 class CourseSerializer(serializers.ModelSerializer):
-    contents = CourseContentSerializer(many=True, read_only=True)
-    creator_email = serializers.EmailField(source="creator.email", read_only=True)
+    creator_email = serializers.EmailField(
+        source="creator.email",
+        read_only=True
+    )
 
     class Meta:
         model = Course
@@ -26,23 +20,18 @@ class CourseSerializer(serializers.ModelSerializer):
             "description",
             "creator_email",
             "created_at",
-            "contents",
         ]
 
 
-class EnrollmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Enrollment
-        fields = ["id", "course", "enrolled_at"]
-
-
+# -------------------------
+# Lesson
+# -------------------------
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CourseContent
+        model = Lesson
         fields = [
             "id",
-            "course",
             "section",
             "title",
             "content",
@@ -51,6 +40,9 @@ class LessonSerializer(serializers.ModelSerializer):
         ]
 
 
+# -------------------------
+# Section (Nested Lessons)
+# -------------------------
 
 class SectionSerializer(serializers.ModelSerializer):
     lessons = LessonSerializer(many=True, read_only=True)
@@ -63,4 +55,18 @@ class SectionSerializer(serializers.ModelSerializer):
             "title",
             "order",
             "lessons"
+        ]
+
+
+# -------------------------
+# Enrollment
+# -------------------------
+
+class EnrollmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Enrollment
+        fields = [
+            "id",
+            "course",
+            "enrolled_at"
         ]
